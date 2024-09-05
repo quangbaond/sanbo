@@ -1,0 +1,13 @@
+var express = require('express');
+var router = express.Router();
+const { register, login, profile, logout, updateBank, updateAvatar, updateProfile, updatePassword } = require('../controller/auth');
+const jwtMiddleware = require('../middleware/jwtMiddleware');
+router.post('/register', register);
+router.post('/login', login);
+router.get('/profile', jwtMiddleware.verifyToken, profile);
+router.post('/logout', jwtMiddleware.verifyToken, logout);
+router.post('/update-bank', jwtMiddleware.verifyToken, updateBank);
+router.post('/update-avatar', jwtMiddleware.verifyToken, updateAvatar);
+router.post('/update-profile', jwtMiddleware.verifyToken, updateProfile);
+router.post('/update-password', jwtMiddleware.verifyToken, updatePassword);
+module.exports = router;
